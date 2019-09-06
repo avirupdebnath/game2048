@@ -1,0 +1,19 @@
+.gameover {
+	height: 300px;
+	width: 500px;
+	align-self: center;
+	margin: auto auto; 
+	margin-top:0px;
+	padding:0px;
+}
+
+.Score{
+	padding: 10px;
+	width: 500px;
+	height: 500px;
+	text-align: center;
+	margin: auto auto;
+	font-size: 50px;
+	font-family: poppins, sans-serif;
+    
+}

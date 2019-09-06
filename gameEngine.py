@@ -31,14 +31,15 @@ def getBlanks(grid,size):
 def generate2(grid,size):
     lis_blocks=getBlanks(grid,size)
     flag=1
+    status=1
     while(flag):
         if(len(lis_blocks)!= 0):
             block=random.choice(lis_blocks)
             grid[int(block/size)][int(block%size)]=2
             flag=0
         else:
-            print("Game Over")
-        return grid
+            status=0
+        return grid,status
 
 def initGame(size):
     grid = makeGrid(size)
@@ -238,6 +239,7 @@ def gameController():
     size=int(input("Enter grid size"))
     flag=1
     score=0
+    status=1
     grid = initGame(size)
     gameGrids=[list(map(list,grid))]
     while(flag):
@@ -251,22 +253,22 @@ def gameController():
             
         elif(choice=='w'):
             grid,score = up(grid,size,score)
-            grid = generate2(grid,size)
+            grid,status = generate2(grid,size)
             
             
         elif(choice=='s'):
             grid,score = down(grid,size,score)
-            grid = generate2(grid,size)
+            grid,status = generate2(grid,size)
             
             
         elif(choice=='d'):
             grid,score = right(grid,size,score)
-            grid = generate2(grid,size)
+            grid,status = generate2(grid,size)
             
             
         elif(choice=='a'):
             grid,score = left(grid,size,score)
-            grid = generate2(grid,size)
+            grid,status = generate2(grid,size)
            
         elif(choice=='u'):
             if (len(gameGrids)>1):
