@@ -93,3 +93,8 @@
 		background-color:coral;
 		color: black;
 }
+footer div{
+		display: grid;
+		margin: auto;
+		width: 200px;
+}
