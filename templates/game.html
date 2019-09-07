@@ -8,8 +8,13 @@
 	</head>
 	<body>
 		<form id=game method="POST">
-			<div class="score">
-				<p>SCORE : {{score}}</p>				
+			<div class="scoreboard">
+				<div class="score"><div id="score">SCORE : {{score}}</div></div>					
+				<div class="score"><div id="hscore">{{score}} : HIGH SCORE</div></div>
+			</div>
+			<div class="undo">
+				<input type="submit" id="undo" name="control" value="UNDO">
+				<input type="submit" id="reset" name="control" value="RESET">
 			</div>
 			<div class="grid-container">
 					<div class="grid-item">{{grid1}}</div>
@@ -30,12 +35,12 @@
 					<div class="grid-item">{{grid16}}</div>
 			</div>
 			<div class="buttons">
-				<input type="submit" class="controls" name="control" value="LEFT" >
-				<input type="submit" class="controls" name="control" value="UP">
-				<input type="submit" class="controls" name="control" value="DOWN">
-				<input type="submit" class="controls" name="control" value="RIGHT">
-				<input type="submit" class="controls" id="undo" name="control" value="UNDO">				
+				<input type="submit" class="controls" id="left" name="control" value="LEFT" >
+				<input type="submit" class="controls" id="up" name="control" value="UP">
+				<input type="submit" class="controls" id="down" name="control" value="DOWN">
+				<input type="submit" class="controls" id="right" name="control" value="RIGHT">
 			</div>	
+			
 		</form>
 	</body>
 </html>
