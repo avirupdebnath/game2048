@@ -281,7 +281,6 @@ def gameController():
             continue
         gameGrids.append(list(map(list,grid)))
             
-        
     
     
 
