@@ -91,4 +91,4 @@ def gameControllerPost():
         print(status)
         return render_template('gameover.html',score=score)
 if __name__ == "__main__":
-    app.run()
+    app.run(threaded=False)
