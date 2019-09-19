@@ -1,7 +1,6 @@
 import gameEngine
 from flask import Flask,request,render_template,flash,redirect,url_for
 app = Flask(__name__)
-app.debug = False 
 app.secret_key="random string"
 size=0
 grid=[]
