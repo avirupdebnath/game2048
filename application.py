@@ -14,7 +14,7 @@ def gameControllerPost():
         session['size']=4
         session['grid']=gameEngine.initGame(session['size'])
         session['score']=0
-        session['allscores']=[]
+        session['allscores']=[0,0]
         session['gameGrids']= [list(map(list,session['grid']))]
         session['gameGrids'].append(list(map(list,session['grid'])))
         session['status']=1
