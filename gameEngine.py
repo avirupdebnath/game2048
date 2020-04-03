@@ -234,7 +234,12 @@ def left(grid,size,score):
         count+=1
     return grid,score
 
-    
+def hasWon(grid,status):
+    for rows in grid:
+        if 2048 in rows:
+            return 200
+    return status    
+
 def gameController():
     size=int(input("Enter grid size"))
     flag=1
@@ -254,22 +259,24 @@ def gameController():
         elif(choice=='w'):
             grid,score = up(grid,size,score)
             grid,status = generate2(grid,size)
+            status=hasWon(grid,status)
             
             
         elif(choice=='s'):
             grid,score = down(grid,size,score)
             grid,status = generate2(grid,size)
-            
+            status=hasWon(grid,status)
             
         elif(choice=='d'):
             grid,score = right(grid,size,score)
             grid,status = generate2(grid,size)
-            
+            status=hasWon(grid,status)
             
         elif(choice=='a'):
             grid,score = left(grid,size,score)
             grid,status = generate2(grid,size)
-           
+            status=hasWon(grid,status)
+
         elif(choice=='u'):
             if (len(gameGrids)>1):
                 gameGrids.pop()
@@ -281,8 +288,3 @@ def gameController():
             continue
         gameGrids.append(list(map(list,grid)))
             
-        
-    
-    
-
-
