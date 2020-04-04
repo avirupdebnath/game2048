@@ -14,9 +14,11 @@ def gameControllerPost():
         session['size']=4
         session['grid']=gameEngine.initGame(session['size'])
         session['score']=0
-        session['allscores']=[0,0]
-        session['gameGrids']= [list(map(list,session['grid']))]
-        session['gameGrids'].append(list(map(list,session['grid'])))
+        session['allscores']=[0]
+        session['gameGrids']=[list(map(list,session['grid']))]
+        print(session['gameGrids'])
+        print(session['allscores'])
+        #session['gameGrids'].append(list(map(list,session['grid'])))
         session['status']=1
         score=session['score']
         grid=session['grid']
@@ -76,8 +78,13 @@ def gameControllerPost():
            
         else:
             pass
+        if(len(gameGrids)==6):
+            allscores.pop(0)
+            gameGrids.pop(0)
         allscores.append(score)
         gameGrids.append(list(map(list,grid)))  
+
+        print(len(gameGrids),len(allscores))
 
         session['grid']=grid
         session['score']=score
