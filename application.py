@@ -18,7 +18,6 @@ def gameControllerPost():
         session['gameGrids']=[list(map(list,session['grid']))]
         print(session['gameGrids'])
         print(session['allscores'])
-        #session['gameGrids'].append(list(map(list,session['grid'])))
         session['status']=1
         score=session['score']
         grid=session['grid']
@@ -46,19 +45,16 @@ def gameControllerPost():
             grid,score = gameEngine.up(grid,size,score)
             grid,status = gameEngine.generate2(grid,size)
             status=gameEngine.hasWon(grid,status)
-                
-                
+                            
         elif(choice=='DOWN'):
             grid,score = gameEngine.down(grid,size,score)
             grid,status = gameEngine.generate2(grid,size)
             status=gameEngine.hasWon(grid,status)
                 
-                
         elif(choice=='RIGHT'):
             grid,score = gameEngine.right(grid,size,score)
             grid,status = gameEngine.generate2(grid,size)
             status=gameEngine.hasWon(grid,status)
-                
                 
         elif(choice=='LEFT'):
             grid,score = gameEngine.left(grid,size,score)
@@ -84,8 +80,6 @@ def gameControllerPost():
         allscores.append(score)
         gameGrids.append(list(map(list,grid)))  
 
-        print(len(gameGrids),len(allscores))
-
         session['grid']=grid
         session['score']=score
         session['allscores']=allscores
@@ -102,6 +96,5 @@ def gameControllerPost():
         else:
             session.clear()
             return render_template('gameover.html',score=score)
-
 if __name__ == "__main__":
     app.run()
