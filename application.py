@@ -16,6 +16,8 @@ def sessionClear():
 def gameControllerPost():
     if 'highScore' not in session:
         session['highScore']=0
+    if 'whosTheBoss' not in session:
+        session['whosTheBoss']=0
     if 'grid' not in session:
         sessionClear()
         session['size']=4
@@ -30,6 +32,7 @@ def gameControllerPost():
         return render_template('game.html',hscore=highScore,score=score,grid1=grid[0][0],grid2=grid[0][1],grid3=grid[0][2],grid4=grid[0][3],grid5=grid[1][0],grid6=grid[1][1],grid7=grid[1][2],grid8=grid[1][3],grid9=grid[2][0],grid10=grid[2][1],grid11=grid[2][2],grid12=grid[2][3],grid13=grid[3][0],grid14=grid[3][1],grid15=grid[3][2],grid16=grid[3][3])
     
     elif request.method== 'GET':
+        whoTheBoss=session['whosTheBoss']
         size=session['size'] 
         grid =session['grid']
         score =session['score']
@@ -40,6 +43,7 @@ def gameControllerPost():
         return render_template('game.html',hscore=highScore,score=score,grid1=grid[0][0],grid2=grid[0][1],grid3=grid[0][2],grid4=grid[0][3],grid5=grid[1][0],grid6=grid[1][1],grid7=grid[1][2],grid8=grid[1][3],grid9=grid[2][0],grid10=grid[2][1],grid11=grid[2][2],grid12=grid[2][3],grid13=grid[3][0],grid14=grid[3][1],grid15=grid[3][2],grid16=grid[3][3])
     
     elif request.method== 'POST':
+        whoTheBoss=session['whosTheBoss']
         size=session['size'] 
         grid =session['grid']
         score =session['score']
@@ -50,26 +54,31 @@ def gameControllerPost():
 
         choice=str(request.form['control'])
         if(choice=='UP'):
+            whoTheBoss=0
             grid,score = gameEngine.up(grid,size,score)
             grid,status = gameEngine.generate2(grid,size)
             status=gameEngine.hasWon(grid,status)
                             
         elif(choice=='DOWN'):
+            whoTheBoss=0
             grid,score = gameEngine.down(grid,size,score)
             grid,status = gameEngine.generate2(grid,size)
             status=gameEngine.hasWon(grid,status)
                 
         elif(choice=='RIGHT'):
+            whoTheBoss+=1
             grid,score = gameEngine.right(grid,size,score)
             grid,status = gameEngine.generate2(grid,size)
             status=gameEngine.hasWon(grid,status)
                 
         elif(choice=='LEFT'):
+            whoTheBoss=0
             grid,score = gameEngine.left(grid,size,score)
             grid,status = gameEngine.generate2(grid,size)
             status=gameEngine.hasWon(grid,status)
             
         elif(choice=='UNDO'):
+            whoTheBoss=0
             if (len(gameGrids)>1):
                 gameGrids.pop()
                 allscores.pop()
@@ -98,9 +107,15 @@ def gameControllerPost():
         session['gameGrids']= gameGrids
         session['status']=status
         session['highScore']=highScore
+        session['whosTheBoss']=whoTheBoss
 
         if (status==200):
-            session.clear()
+            sessionClear()
+            return render_template('gamewin.html',score=score)
+
+        if (whoTheBoss==10):
+            sessionClear()
+            score="BOSS DOESNT NEED A SCORE TO WIN ! :)"
             return render_template('gamewin.html',score=score)
 
         elif (status == 1):
